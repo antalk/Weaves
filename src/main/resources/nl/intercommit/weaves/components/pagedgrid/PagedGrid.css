@@ -1,0 +1,37 @@
+.weaves-pagedgrid-noresults {
+	color: red;
+	font-weight: bold;
+	font-size: smaller;
+}
+
+tr.odd {
+	background-color: #eeeeee;
+}
+
+.rowSelect { /* fallback */
+	background-color: #cccccc !important;
+}
+
+.rowClicked {
+	background-color: #aabbaa !important;
+}
+
+.tdSelect {
+	background: #FF9933;
+}
+
+.weaves-pagedgrid-hidden {
+	visibility: hidden;
+	width: 0px;
+	height: 0px;
+}
+
+.child {
+	border-bottom: none;
+}
+
+.table .checkbox {
+	border: none;
+	border-top: none;
+	
+}

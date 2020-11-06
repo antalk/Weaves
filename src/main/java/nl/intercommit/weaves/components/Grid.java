@@ -1,4 +1,4 @@
-/*  Copyright 2011 InterCommIT b.v.
+/*  Copyright 2014 InterCommIT b.v.
 *
 *  This file is part of the "Weaves" project hosted on https://github.com/intercommit/Weaves
 *
@@ -19,21 +19,41 @@
 package nl.intercommit.weaves.components;
 
 import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.ClientElement;
+import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.Mixins;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 /**
  * This class is needed because we needed to override the Pager component
  * 
  * @see org.apache.tapestry5.corelib.components.Grid
- *
+ * 
+ * @tapestrydoc
  */
-public class Grid extends org.apache.tapestry5.corelib.components.Grid {
+public class Grid extends org.apache.tapestry5.corelib.components.Grid implements ClientElement  {
 
 	@Parameter(defaultPrefix = BindingConstants.LITERAL,allowNull=true)
 	private String nonSortable;
 	
-	@Parameter(required=true)
+	@Parameter(required=false)
 	private PagedGridPager pagedpager;
+	
+	@Parameter(required=true,defaultPrefix=BindingConstants.LITERAL)
+	private String clientId;
+	
+	@Mixins("ck/OnEvent")
+	@Component(parameters = { 
+			"columnIndex=inherit:columnIndex", 
+			"rowsPerPage=rowsPerPage", 
+			"currentPage=currentPage", 
+			"row=row",
+			"overrides=overrides",
+	        "event=literal:click",
+	        "onCompleteCallback=clickRow"
+	        }, 
+	        publishParameters = "rowIndex,rowClass,volatile,encoder,lean")
+	private nl.intercommit.weaves.components.GridRows rows;
 	
 	public Object getPagerTop() {
 		 Object o = super.getPagerTop();
@@ -52,9 +72,16 @@ public class Grid extends org.apache.tapestry5.corelib.components.Grid {
 		if (nonSortable != null) {
 			final String[] columns = nonSortable.split(",");
 			for (final String column: columns) {
-				getDataModel().get(column).sortable(false);
+				if (getDataModel().getPropertyNames().contains(column)) {
+					getDataModel().get(column).sortable(false);
+				}
 			}
 		}
+	}
+
+	@Override
+	public String getClientId() {
+		return clientId;
 	}
 
 }

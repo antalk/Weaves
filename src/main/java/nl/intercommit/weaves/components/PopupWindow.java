@@ -1,4 +1,4 @@
-/*  Copyright 2011 InterCommIT b.v.
+/*  Copyright 2014 InterCommIT b.v.
 *
 *  This file is part of the "Weaves" project hosted on https://github.com/intercommit/Weaves
 *
@@ -38,6 +38,7 @@ import org.chenillekit.tapestry.core.components.Window;
  * 
  * Must have a zoneName parameter, this will allow the window to listen to zone update events and show this window.
  *
+ * @tapestrydoc
  */
 @Import(library={"PopupWindow.js"})
 @SupportsInformalParameters
@@ -49,7 +50,7 @@ public class PopupWindow extends BasicClientElement {
 	@Parameter(required=true,defaultPrefix="literal")
 	private String height;
 	
-	@Parameter()
+	@Parameter
 	private String title;
 	
 	@Parameter(value="true")

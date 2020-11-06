@@ -1,4 +1,4 @@
-/*  Copyright 2011 InterCommIT b.v.
+/*  Copyright 2014 InterCommIT b.v.
 *
 *  This file is part of the "Weaves" project hosted on https://github.com/intercommit/Weaves
 *
@@ -24,6 +24,10 @@ import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
+/**
+ * @tapestrydoc
+ *
+ */
 public abstract class BasicClientElement implements ClientElement {
 	
 	private String assignedClientId;
@@ -39,7 +43,6 @@ public abstract class BasicClientElement implements ClientElement {
 		assignedClientId = javascriptSupport.allocateClientId(clientId);
 	}
 	
-	@Override
 	public String getClientId() {
 		return assignedClientId;
 	}

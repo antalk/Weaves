@@ -1,0 +1,23 @@
+<div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<table id="${clientid}" class="${tableClass}">
+		<thead>
+			<tr>
+				<t:loop source="model.propertynames" value="header">
+					<th>${header}</th>
+				</t:loop>
+			</tr>
+		</thead>
+		<tbody>
+			<t:loop source="rows" value="row" index="rowindex">
+			<tr>
+				<t:loop source="model.propertynames" value="propertyName" formstate="none">
+        			<td>
+            			<t:gridcell model="propmodel" object="row" overrides="overrides"/>
+        			</td>
+    			</t:loop>
+    		</tr>
+    		</t:loop>
+		</tbody>
+	</table>
+	<t:block id="empty">${message:no-data-to-display}</t:block>
+</div>
