@@ -4,17 +4,36 @@
 	
 		<ul class="nav nav-tabs" id="${clientid}">
 			<t:loop source="tabs" value="currenttab">
-				<li><a href="#${currenttab.id}" data-toggle="tab">${currenttab.title}</a></li>
+				<li>
+					<t:if test="dynamic">
+							<t:eventlink t:event="selectTab" t:zone="^" t:context="currenttab.id">
+								${currenttab.title}
+							</t:eventlink>
+						<p:else>
+							<a href="#${currenttab.id}" data-toggle="tab">${currenttab.title}</a>		
+						</p:else>
+					</t:if>
+				</li>
+				<li></li>
 			</t:loop>
 		</ul>
 		
-		<div class="tab-content">
-			<t:loop source="tabs" value="currenttab">
-				<div class="tab-pane" id="${currenttab.id}">
-					<t:delegate to="panelblock"></t:delegate>
+		<t:if test="dynamic">
+			
+			<t:zone t:id="tabContent" id="tabContent">
+				<t:delegate to="dynamicBlock"/>
+			</t:zone>
+		
+			<p:else>
+				<div class="tab-content">
+					<t:loop source="tabs" value="currenttab">
+						<div class="tab-pane" id="${currenttab.id}">
+							<t:delegate to="panelblock"></t:delegate>
+						</div>
+					</t:loop>
 				</div>
-			</t:loop>
-		</div>
+			</p:else>
+		</t:if>
 		
 		<p:else>
 			<div class="ic_t5-tab">

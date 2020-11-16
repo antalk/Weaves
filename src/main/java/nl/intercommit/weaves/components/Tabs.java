@@ -65,6 +65,10 @@ public class Tabs extends BasicClientElement {
 	private String selected;
 	
 	@Property
+	@Parameter(value = "false")
+	private Boolean dynamic;
+	
+	@Property
 	@Parameter(value="literal:ic_t5-panel")
 	private String panelClass;
 	
@@ -90,6 +94,10 @@ public class Tabs extends BasicClientElement {
 	
 	public Block getPanelBlock() {
 		return resources.getContainer().getComponentResources().getBlock(currenttab.getBlockid());
+	}
+	
+	public Block getDynamicBlock() {
+		return resources.getContainer().getComponentResources().getBlock("dynamicBlock");
 	}
 
 	public TabPanel getCurrenttab() {
