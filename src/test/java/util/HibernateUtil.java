@@ -21,14 +21,13 @@ package util;
 import java.io.File;
 import java.net.URISyntaxException;
 
-import junit.framework.Assert;
-import nl.intercommit.weaves.test.entities.Person;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
+
+import junit.framework.Assert;
+import nl.intercommit.weaves.test.entities.Person;
 
 public class HibernateUtil {
 	
@@ -51,7 +50,7 @@ public class HibernateUtil {
 	    		throw new HibernateException("Could not load config file!");
 	    	}
 	    	
-	    	final AnnotationConfiguration config = new AnnotationConfiguration().configure(file);
+	    	final Configuration config = new Configuration().configure(file);
 			for (Class entity: HibernateUtil.entities ) {
 				config.addAnnotatedClass(entity);
 				
@@ -61,10 +60,7 @@ public class HibernateUtil {
     	}
 	}
 
-	public Session create() {
-		return factory.openSession();
-	}
-
+	
 	public Configuration getConfiguration() {
 		return config;
 	}
@@ -73,7 +69,4 @@ public class HibernateUtil {
 		return factory;
 	}
 	
-	public void shutdown() {
-		factory.close();
-	}
 }

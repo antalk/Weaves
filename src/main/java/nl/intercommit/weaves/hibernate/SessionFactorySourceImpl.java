@@ -29,7 +29,7 @@ import org.apache.tapestry5.ioc.services.ClassNameLocator;
 import org.apache.tapestry5.ioc.services.RegistryShutdownListener;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 
 public class SessionFactorySourceImpl implements SessionFactorySource,
 		RegistryShutdownListener {
@@ -53,7 +53,7 @@ public class SessionFactorySourceImpl implements SessionFactorySource,
 
 	private void setupSessionFactory(final String factoryIdentifier,final SessionFactoryConfiguration configuration) {
 		
-		final AnnotationConfiguration hibernateConfig = new AnnotationConfiguration();
+		final Configuration hibernateConfig = new Configuration();
 		final List<Class<?>> entities = loadEntityClasses(configuration);
 		
 		// this loads the file containing the hibernate.cfg.xml specs

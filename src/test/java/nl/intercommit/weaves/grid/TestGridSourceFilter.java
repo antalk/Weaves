@@ -43,7 +43,8 @@ public class TestGridSourceFilter extends TestCase {
 	protected void setUp() throws Exception {
 		util = new HibernateUtil();
 		
-		session = util.create();
+		session = util.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		Person p1 = new Person();
 		p1.setName("fred");
@@ -56,13 +57,14 @@ public class TestGridSourceFilter extends TestCase {
 		persons.add(p2);
 		
 		session.flush();
+		session.getTransaction().commit();
 		
 		super.setUp();
 	}
 	
 	@Override
 	protected void tearDown() throws Exception {
-		util.shutdown();
+		session.close();
 	}
 	
 	
